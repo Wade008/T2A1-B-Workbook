@@ -52,9 +52,13 @@ The bubble sort algorithm involves:
 
 #### Algorithm performance
 
+The bubble sort algorithm includes two main structures, an inner for loop nested inside an outer for loop. Big(O) notation has been used below to analyse the algorithm complexity (number of steps) for worst case scenario:
 
-
-
+Where n is the size of the list to be sorted:  
+- The outer for loop will iterate n number of time. That is, as n increases, the number of iterations increase linearly. Therefore, the outer loop has a Big(O) notation on O(n).
+- The inner loop will iterate by (n - the current iteration number of the outer loop - 1). Even though the inner loop reduces its number of iterations as the outer loop iterates it still increases linearly as n increases. As such, the inner loop also has a Big(O) notation on O(n).
+- Since the inner loop is dependent on the outer loop, the algorithm has a Big(O) notation of O(n) x O(n) which equals O(n x n) or O(n<sup>2</sup>)
+- Therefore, the bubble sort algorithm has a Big(O) notation of O(n<sup>2</sup>)
 
 
 ### The Quicksort algorithm  
