@@ -140,9 +140,7 @@ Since the ```merge()``` function is combined with the ```merge_sort``` function,
 
 ### Performance comparison between Bubble sort and Merge Sort
 
-Based on the Big(O) complexity discussed above, the merge sort algorithms is a more efficient sorting algorithm. The merge sort result, O(log<sub>2</sub>n) indicates the number of steps required to sort an array is lower compared to the number of steps required for the bubble sort algorithm O(n<sup>2</sup>), assuming the same sized array is used in both circumstances. 
-
-
+Based on the Big(O) complexity discussed above, the merge sort algorithms is a more efficient sorting algorithm. The merge sort result, O(log<sub>2</sub>n) indicates there are fewer steps required to sort a particular array compared the bubble sort algorithm O(n<sup>2</sup>). This is particularly true as the size of the array increases.
 
 <hr>  
 
