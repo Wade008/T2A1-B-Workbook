@@ -58,40 +58,89 @@ Where n is the size of the list to be sorted:
 - The outer for loop will iterate n number of time. That is, as n increases, the number of iterations increase linearly. Therefore, the outer loop has a Big(O) notation on O(n).
 - The inner loop will iterate by (n - the current iteration number of the outer loop - 1). Even though the inner loop reduces its number of iterations as the outer loop iterates it still increases linearly as n increases. As such, the inner loop also has a Big(O) notation on O(n).
 - Since the inner loop is dependent on the outer loop, the algorithm has a Big(O) notation of O(n) x O(n) which equals O(n x n) or O(n<sup>2</sup>)
-- Therefore, the bubble sort algorithm has a Big(O) notation of O(n<sup>2</sup>)
+- Therefore, the bubble sort algorithm has a Big(O) notation of O(n<sup>2</sup>)or quadratic complexity. 
 
+(Hijazi, 2021)
 
-### The Quicksort algorithm  
+### The Merge Sort algorithm  
 
-The following python code is an implementation of the quicksort algorithm:
+The following python code is an implementation of the merge sort algorithm:
 
 ```python
-from random import randint
+def merge(left, right):
 
-def quicksort(array):
-   
-    if len(array) < 2:
-        return array
+    if len(left) == 0:
+        return right
 
-    low, same, high = [], [], []
+    if len(right) == 0:
+        return left
 
- 
-    pivot = array[randint(0, len(array) - 1)]
+    result = []
+    index_left = index_right = 0
 
-    for item in array:
+    while len(result) < len(left) + len(right):
+       
+        if left[index_left] <= right[index_right]:
+            result.append(left[index_left])
+            index_left += 1
+        else:
+            result.append(right[index_right])
+            index_right += 1
+
+        if index_right == len(right):
+            result += left[index_left:]
+            break
+
+        if index_left == len(left):
+            result += right[index_right:]
+            break
+
+    return result
+
+
+def merge_sort(array):
     
-        if item < pivot:
-            low.append(item)
-        elif item == pivot:
-            same.append(item)
-        elif item > pivot:
-            high.append(item)
+    if len(array) < 2:
+        return array(Real Python, 2020)
 
-    return quicksort(low) + same + quicksort(high)
+    midpoint = len(array) // 2
+
+    return merge(
+        left=merge_sort(array[:midpoint]),
+        right=merge_sort(array[midpoint:]))
+
 ```
 (Real Python, 2020)
 
+#### Algorithm description  
 
+The merge sort algorithm uses a divide and conquer approach to sorting arrays by firstly breaking the array down into smaller and smaller parts before sorting and merging the parts back together to produce the sorted array. The merge sort algorithm involves the ```merge_sort()``` function recursively calling itself, with each iteration halving the array until only two elements remain (a left element and right element). After this, the ```merge()``` function is constantly called until all elements have been sorted and merged into one array (Real Python, 2020). The algorithm is explained in more detail below with an example. 
+
+**Example:** using the merge sort algorithm to sort elements in the following list ```python my_list = [1,7,3,9,2]```
+
+The merge sort algorithm involves:
+1. The ```merge_sort()``` function is called, passing my_list as the argument. That is, the list to be sorted. 
+2. The ```merge_sort()``` function now calculates the midpoint to be used to halve the list. *The midpoint for my_list is 2*.
+3. The midpoint represents the index value used to break the list into two halves. And this is used to split the list and then call ```merge_sort()``` again. *In this case ```merge_sort(my_list[:midpoint])``` and ```merge_sort(my_list[midpoint:])```, with the result from the first iteration being ```[1,7]``` and ```[3,9,2]```*
+4. This recursive halving process occurs until my_list has been broken down into individual elements. ```[1] [7] [3] [9] [2]```
+5. The ```merge()``` function is now called with the results of left and right halves. That is, the results from the final recursion of ```merge_sort()``` are passed as the left and right keyword arguments to the ```merge()``` function. *For example, ```merge(left = [1], right =[7])```*
+6. This process repeats as the code works it way back up and out of the previous recursion. Therefore, the ```merge()``` function is next called using the results from the earlier ```merge()``` function and so on until the list is sorted. *For example, at some point on the way back out of the recursion ```merge(left = [1,7], right = [2,3,9])``` is called and so on until the final sorted list is returned ```[1,2,3,7,9]```.*
+
+#### Algorithm performance 
+
+The merge sort algorithm can be analysed as two separate steps. Using Big(O) notation to analyse the step complexity for worse case scenario:
+
+1. The ```merge()``` function, which uses a loop to merge two arrays. The length of the two arrays passed into the function can be combined to obtain an overall length of n. As n increases, the number of iterations to be performed by the loop increase in line with the change in n. Therefore, this step has a Big(O) complexity of O(n) or linear complexity. 
+2. The ```merge_sort()``` function, that splits the input list in two parts recursively and then calls the ```merge()``` function. This process involves the number steps to be performed increasing as n increases in size, however, the rate of increase slows as n gets larger and larger. Notably, The overall number of steps required to split the list in half, down to a single element as n increases can be explained as O(log<sub>2</sub>n) complexity.  
+
+(Real Python, 2020)
+
+Since the ```merge()``` function is combined with the ```merge_sort``` function, the Big(O) complexity for the merge sort algorithm in O(n) x O(log<sub>2</sub>n) resulting in an overall complexity of O(n log<sub>2</sub>n) (Real Python, 2020).
+
+
+### Performance comparison between Bubble sort and Merge Sort
+
+Based on the Big(O) complexity discussed above, the merge sort algorithms is a more efficient sorting algorithm. The merge sort result, O(log<sub>2</sub>n) indicates the number of steps required to sort an array is lower compared to the number of steps required for the bubble sort algorithm O(n<sup>2</sup>), assuming the same sized array is used in both circumstances. 
 
 
 
