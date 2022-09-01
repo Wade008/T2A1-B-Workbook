@@ -1,4 +1,30 @@
 
+def find_index(elements, value):
+    left, right = 0, len(elements) - 1
+
+    while left <= right:
+        middle = (left + right) // 2
+
+        if elements[middle] == value:
+            return middle
+
+        if elements[middle] < value:
+            left = middle + 1
+        elif elements[middle] > value:
+            right = middle - 1
+
+    return "No match found"
+
+print(find_index([1,3,5,7,10,15], 10))
+
+
+
+
+
+
+
+
+
 
 def bubble_sort(array):
     n = len(array)
@@ -36,4 +62,4 @@ def bubble_sort(array):
 
 arr = [1,7,3,9,2]
 
-print(bubble_sort(arr))
+# print(bubble_sort(arr))
