@@ -56,7 +56,7 @@ The bubble sort algorithm includes two main structures, an inner for loop nested
 
 Where n is the size of the list to be sorted:  
 - The outer for loop will iterate n number of time. That is, as n increases, the number of iterations increase linearly. Therefore, the outer loop has a Big(O) notation on O(n).
-- The inner loop will iterate by (n - the current iteration number of the outer loop - 1). Even though the inner loop reduces its number of iterations as the outer loop iterates it still increases linearly as n increases. As such, the inner loop also has a Big(O) notation on O(n).
+- The inner loop will iterate by (n - the current iteration number of the outer loop - 1). Even though the inner loop reduces its number of iterations as the outer loop iterates it still increases linearly as n increases. As such, the inner loop also has a Big(O) notation of O(n).
 - Since the inner loop is dependent on the outer loop, the algorithm has a Big(O) notation of O(n) x O(n) which equals O(n x n) or O(n<sup>2</sup>)
 - Therefore, the bubble sort algorithm has a Big(O) notation of O(n<sup>2</sup>) or quadratic complexity. 
 
@@ -131,16 +131,13 @@ The merge sort algorithm involves:
 The merge sort algorithm can be analysed as two separate steps. Using Big(O) notation to analyse the step complexity for worse case scenario:
 
 1. The ```merge()``` function, which uses a loop to merge two arrays. The length of the two arrays passed into the function can be combined to obtain an overall length of n. As n increases, the number of iterations to be performed by the loop increase in line with the change in n. Therefore, this step has a Big(O) complexity of O(n) or linear complexity. 
-2. The ```merge_sort()``` function, that splits the input list in two parts recursively and then calls the ```merge()``` function. This process involves the number of steps to be performed increasing as n increases in size, however, the rate of increase slows as n gets larger and larger. Notably, The overall number of steps required to split the list in half, down to a single element as n increases can be explained as O(log<sub>2</sub>n) complexity.  
+2. The ```merge_sort()``` function, that splits the input list in two parts recursively and then calls the ```merge()``` function. This process involves the number of steps to be performed increasing as n increases in size, however, the rate of increase slows as n gets larger and larger. Notably, The overall number of steps required to split the list in half, down to a single element as n increases can be explained by:
+    - Let 'a' represent the number of steps. Therefore, a = n/2<sup>a</sup>, which equates to a O(log n) complexity.  
 
 (Real Python, 2020b)
 
-Since the ```merge()``` function is combined with the ```merge_sort``` function, the Big(O) complexity for the merge sort algorithm in O(n) x O(log<sub>2</sub>n) resulting in an overall complexity of O(n log<sub>2</sub>n) (Real Python, 2020b).
-
-
-### Performance comparison between Bubble sort and Merge Sort
-
-Based on the Big(O) complexity discussed above, the merge sort algorithms is a more efficient sorting algorithm. The merge sort result, O(log<sub>2</sub>n) indicates there are fewer steps required to sort a particular array compared the bubble sort algorithm O(n<sup>2</sup>). This is particularly true as the size of the array increases.
+Since the ```merge()``` function is combined with the ```merge_sort``` function, the Big(O) complexity for the merge sort algorithm in O(n) x O(log n) resulting in an overall complexity of O(n log n) (Real Python, 2020b).
+Real Python (2020b). Sorting Algorithms in Python. [online] Realpython.com. Available at: https://realpython.com/sorting-algorithms-python/ [Accessed 21 Aug. 2022]. O(log n) indicates there are fewer steps required to sort a particular array compared with the bubble sort algorithm O(n<sup>2</sup>). This is particularly true as the size of the array increases.
 
 <hr>  
 
@@ -176,7 +173,7 @@ def find_index(elements, value):
 
 Similar to the merge sort algorithm above, the binary search algorithm uses an iterative or recursive, divide and conquer approach to searching for a particular value in a list of values; however, for the algorithm to work, the list must first be sorted from smallest to largest value. Also, if there are duplicate values in the list, the algorithm will only return the position of the first instance. Once the array is sorted, the algorithm determines the location of the middle element in the array and checks if the middle element's value equals that of the search value. If the middle element is equal to the value, the algorithm returns the location of the value and stops. If the middle element value is lower than the search value, the algorithm then repeats the search but only on the part of the list above the middle element. And if the middle element value is greater than the search value, the algorithm then repeats the search but only on the part of the list below the middle element. Essentially, the search process involves dividing the list in half after each search attempt until the desired value is found (Bee, 2020).
 
-**Example:** using the binary sort algorithm to find the index for the value 10 in the following list ```python my_list = [1,3,5,7,10,15]```
+**Example:** using the binary ssearch algorithm to find the index for the value 10 in the following list ```python my_list = [1,3,5,7,10,15]```
 
 The binary search algorithm involves:
 
@@ -190,12 +187,55 @@ The binary search algorithm involves:
 
 #### Algorithm performance  
 
+The binary search algorithm includes a single loop structure. Big(O) notation has been used below to analyse the algorithm complexity (number of steps) for worst case scenario. Note, it is assumed the list has already been sorted in ascending order:
 
+Where n is the size of the list to be searched: 
+- Since the number of elements being searched is effectively halved after each iteration of the loop structure, the number of steps required to find a given element can be explained as a = n/2<sup>a</sup>, where 'a' is the number steps and 'n' is the number of elements in the list to be searched. Therefore, on the first iteration, the list is divided in half, on the second iteration it is divided into quarters and so on. The number of steps required can be expressed as log<sub>2</sub>n and has a Big O value of O(log n). As the value of n increases the number of steps increases, but at a decreasing rate, making the binary search algorithm an efficient search algorithm for large lists.     
 
+### The Linear Search algorithm  
 
+The following python code is an implementation of the linear search algorithm:
 
+```python
+
+def find_index(elements, value):
+    for index, element in enumerate(elements):
+        if element == value:
+            return index
+```
+(Real Python, 2020a)
+
+#### Algorithm description   
+
+The linear search algorithm works by looping over a list of elements, starting with the first element and working through each element until the value is found or the end of the list. Essentially, the function above loops over elements in a list in a consistent order and only checks each element once until the value is found (Real Python, 2020a).  
+
+**Example:** using the linear search algorithm to find the index for the value 10 in the following list ```python my_list = [1,3,5,7,10,15]```
+
+1. The ```find_index()``` function is called, passing my_list and the value 10 as arguments.
+2. The first step involves entering the for loop where the enumerate function is used to iterate through the first index and element in the list. *That is index 0 and element 1, with the value 1.*
+3. The element value is then checked against the search value. *Since 1 is not equal to 10, the loop begins a second iteration.*
+4. The second iteration of the loop performs a check against the second element and the search value. *The value 3 does not equal 10, so the loop begin the third iteration* 
+5. The third iteration of the loop performs a check against the third element and the search value. *The value 5 does not equal 10, so the loop begin the fourth iteration* 
+6. The fourth iteration of the loop performs a check against the fourth element and the search value. *The value 7 does not equal 10, so the loop begin the fifth iteration* 
+7. The fifth iteration of the loop performs a check against the fifth element and the search value. *The value 10 equals 10, so the loop stops, the function returns the index value 4 and ends.*
+Assuming the element being searched for is at the very end of the list,
+The linear search algorithm includes a single loop structure. Big(O) notation has been used below to analyse the algorithm complexity (number of steps) for worst case scenario.
+
+Where n is the size of the list to be searched: 
+- The number of steps required to complete the search using the linear search algorithm is directly proportional to the size of the list or n. As n increases in size, the number of iterations increase by n or linearly. The linear search therefore has a Big(O) notation of O(n).
+
+### Performance comparison between Binary Search and Linear Search  
+
+Based on the Big(O) complexity discussed above, the binary search algorithm is a more efficient searching algorithm, especially as the size of the list gets larger. The binary search algorithm result, O(log n) indicates there are fewer steps required to search for a value in a list compared the linear search algorithm O(n). This is particularly true as the size of the list increases. 
 
 <hr>  
 
 ## References  
 
+Bee (2020). All You Need to Know About Big O Notation [Python Examples]. [online] Skerritt.blog. Available at: https://skerritt.blog/big-o/ [Accessed 1 Sep. 2022].
+
+Hijazi, M. (2021). Big O Notation: Bubble Search in Unity - Level Up Coding. [online] Medium. Available at: https://levelup.gitconnected.com/big-o-notation-bubble-search-in-unity-c90ca1f608d0 [Accessed 27 Aug. 2022].
+
+Real Python (2020a). How to Do a Binary Search in Python. [online] Realpython.com. Available at: https://realpython.com/binary-search-python/#iteratively [Accessed 1 Sep. 2022].
+
+Real Python (2020b). Sorting Algorithms in Python. [online] Realpython.com. Available at: https://realpython.com/sorting-algorithms-python/ [Accessed 21 Aug. 2022].
