@@ -57,10 +57,11 @@ The bubble sort algorithm includes two main structures, an inner for loop nested
 Where n is the size of the list to be sorted:  
 - The outer for loop will iterate n number of time. That is, as n increases, the number of iterations increase linearly. Therefore, the outer loop has a Big(O) notation on O(n).
 - The inner loop will iterate by (n - the current iteration number of the outer loop - 1). Even though the inner loop reduces its number of iterations as the outer loop iterates it still increases linearly as n increases. As such, the inner loop also has a Big(O) notation of O(n).
-- Since the inner loop is dependent on the outer loop, the algorithm has a Big(O) notation of O(n) x O(n) which equals O(n x n) or O(n<sup>2</sup>)
+- Since the inner loop is dependent on the outer loop, the algorithm has to make (n - 1) + (n - 2) + (n - 3) + … + 2 + 1 = n(n-1)/2 comparisons before it finishes executing, which can be simplified to $\frac{1}{2}$ n<sup>2</sup> - $\frac{1}{2}$ n. In relation to Big(O) analysis, constants don't change with the size of the array, as such they can be dropped leaving n<sup>2</sup> - n. Moreover, Big(O) notation is concerned with the term that will grow the fastest, as such the second term can be dropped, leaving n<sup>2</sup>.  
+- Another way to analyse the result is to combine the Big(O) notation from both inner and outer loops: O(n) x O(n), which equals O(n x n) or O(n<sup>2</sup>)
 - Therefore, the bubble sort algorithm has a Big(O) notation of O(n<sup>2</sup>) or quadratic complexity. 
 
-(Hijazi, 2021)
+(Real Python 2020b; Hijazi 2021)
 
 ### The Merge Sort algorithm  
 
@@ -134,10 +135,14 @@ The merge sort algorithm can be analysed as two separate steps. Using Big(O) not
 2. The ```merge_sort()``` function, that splits the input list in two parts recursively and then calls the ```merge()``` function. This process involves the number of steps to be performed increasing as n increases in size, however, the rate of increase slows as n gets larger and larger. Notably, The overall number of steps required to split the list in half, down to a single element as n increases can be explained by:
     - Let 'a' represent the number of steps. Therefore, a = n/2<sup>a</sup>, which equates to a O(log n) complexity.  
 
-(Real Python, 2020b)
+(Real Python, 2020b)  
 
-Since the ```merge()``` function is combined with the ```merge_sort``` function, the Big(O) complexity for the merge sort algorithm in O(n) x O(log n) resulting in an overall complexity of O(n log n) (Real Python, 2020b).
-Real Python (2020b). Sorting Algorithms in Python. [online] Realpython.com. Available at: https://realpython.com/sorting-algorithms-python/ [Accessed 21 Aug. 2022]. O(log n) indicates there are fewer steps required to sort a particular array compared with the bubble sort algorithm O(n<sup>2</sup>). This is particularly true as the size of the array increases.
+Since the ```merge()``` function is combined with the ```merge_sort``` function, the Big(O) complexity for the merge sort algorithm is O(n) x O(log n) resulting in an overall complexity of O(n log n) (Real Python, 2020b).  
+
+### Performance comparison between Bubble Sort and Merge Sort  
+
+Based on the Big(O) complexity discussed above, The merge sort algorithm has O(log n) complexity, indicating there are fewer steps required to sort a particular array compared with the bubble sort algorithm O(n<sup>2</sup>). For example, to sort an array of 10 elements using the bubble sort algorithm it could take up to 10 X 10 = 100 iterations to sort the array, while the merge sort algorithm could take 10 X log<sub>2</sub>10 = 32 iterations (approx.) to sort the array, making the merge sort algorithm more efficient.
+
 
 <hr>  
 
@@ -226,7 +231,7 @@ Where n is the size of the list to be searched:
 
 ### Performance comparison between Binary Search and Linear Search  
 
-Based on the Big(O) complexity discussed above, the binary search algorithm is a more efficient searching algorithm, especially as the size of the list gets larger. The binary search algorithm result, O(log n) indicates there are fewer steps required to search for a value in a list compared the linear search algorithm O(n). This is particularly true as the size of the list increases. 
+Based on the Big(O) complexity discussed above, the binary search algorithm is a more efficient searching algorithm, especially as the size of the list gets larger. The binary search algorithm result, O(log n) indicates there are fewer steps required to search for a value in a list compared with the linear search algorithm O(n). This is particularly true as the size of the list increases. 
 
 <hr>  
 
