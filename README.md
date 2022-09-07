@@ -55,6 +55,7 @@ The bubble sort algorithm involves:
 The bubble sort algorithm includes two main structures, an inner for loop nested inside an outer for loop. Big(O) notation has been used below to analyse the algorithm complexity (number of steps) for worst case scenario:
 
 Where n is the size of the list to be sorted:  
+- Before the outer loop begins, the length of the array is assigned to the variable n. This only happens once regardless of the size of the input array. This step has a Big O complexity of n(1) or constant and can be ignored as it has no bearing on the overall performance of the algorithm.
 - The outer for loop will iterate n number of time. That is, as n increases, the number of iterations increase linearly. Therefore, the outer loop has a Big(O) notation on O(n).
 - The inner loop will iterate by (n - the current iteration number of the outer loop - 1). Even though the inner loop reduces its number of iterations as the outer loop iterates it still increases linearly as n increases. As such, the inner loop also has a Big(O) notation of O(n).
 - Since the inner loop is dependent on the outer loop, the algorithm has to make (n - 1) + (n - 2) + (n - 3) + … + 2 + 1 = n(n-1)/2 comparisons before it finishes executing, which can be simplified to $\frac{1}{2}$ n<sup>2</sup> - $\frac{1}{2}$ n. In relation to Big(O) analysis, constants don't change with the size of the array, as such they can be dropped leaving n<sup>2</sup> - n. Moreover, Big(O) notation is concerned with the term that will grow the fastest, as such the second term can be dropped, leaving n<sup>2</sup>.  
@@ -115,7 +116,7 @@ def merge_sort(array):
 
 #### Algorithm description  
 
-The merge sort algorithm uses a divide and conquer approach to sorting arrays by firstly breaking the array down into smaller and smaller parts before sorting and merging the parts back together to produce the sorted array. The merge sort algorithm involves the ```merge_sort()``` function recursively calling itself, with each iteration halving the array until only two elements remain (a left element and right element). After this, the ```merge()``` function is constantly called until all elements have been sorted and merged into one array (Real Python, 2020b). The algorithm is explained in more detail below with an example. 
+The merge sort algorithm uses a divide-and-conquer approach to sorting arrays by firstly breaking the array down into smaller and smaller parts before sorting and merging the parts back together to produce the sorted array. The merge sort algorithm involves the ```merge_sort()``` function recursively calling itself, with each iteration halving the array until only two elements remain (a left element and right element). After this, the ```merge()``` function is constantly called until all elements have been sorted and merged into one array (Real Python, 2020b). The algorithm is explained in more detail below with an example. 
 
 **Example:** using the merge sort algorithm to sort elements in the following list ```python my_list = [1,7,3,9,2]```
 
@@ -141,7 +142,7 @@ Since the ```merge()``` function is combined with the ```merge_sort``` function,
 
 ### Performance comparison between Bubble Sort and Merge Sort  
 
-Based on the Big(O) complexity discussed above, The merge sort algorithm has O(log n) complexity, indicating there are fewer steps required to sort a particular array compared with the bubble sort algorithm O(n<sup>2</sup>). For example, to sort an array of 10 elements using the bubble sort algorithm it could take up to 10 X 10 = 100 iterations to sort the array, while the merge sort algorithm could take 10 X log<sub>2</sub>10 = 32 iterations (approx.) to sort the array, making the merge sort algorithm more efficient.
+Based on the Big(O) complexity discussed above, The merge sort algorithm has O(n log n) complexity, indicating there are fewer steps required to sort a particular array compared with the bubble sort algorithm O(n<sup>2</sup>). For example, to sort an array of 10 elements using the bubble sort algorithm it could take up to 10 X 10 = 100 iterations to sort the array, while the merge sort algorithm could take 10 X log<sub>2</sub>10 = 32 iterations (approx.) to sort the array, making the merge sort algorithm more efficient.
 
 
 <hr>  
@@ -176,7 +177,7 @@ def find_index(elements, value):
 
 #### Algorithm description   
 
-Similar to the merge sort algorithm above, the binary search algorithm uses an iterative or recursive, divide and conquer approach to searching for a particular value in a list of values; however, for the algorithm to work, the list must first be sorted from smallest to largest value. Also, if there are duplicate values in the list, the algorithm will only return the position of the first instance. Once the array is sorted, the algorithm determines the location of the middle element in the array and checks if the middle element's value equals that of the search value. If the middle element is equal to the value, the algorithm returns the location of the value and stops. If the middle element value is lower than the search value, the algorithm then repeats the search but only on the part of the list above the middle element. And if the middle element value is greater than the search value, the algorithm then repeats the search but only on the part of the list below the middle element. Essentially, the search process involves dividing the list in half after each search attempt until the desired value is found (Bee, 2020).
+Similar to the merge sort algorithm above, the binary search algorithm uses an iterative or recursive, divide-and-conquer approach to searching for a particular value in a list of values; however, for the algorithm to work, the list must first be sorted from smallest to largest value. Also, if there are duplicate values in the list, the algorithm will only return the position of the first instance. Once the array is sorted, the algorithm determines the location of the middle element in the array and checks if the middle element's value equals that of the search value. If the middle element is equal to the value, the algorithm returns the location of the value and stops. If the middle element value is lower than the search value, the algorithm then repeats the search but only on the part of the list above the middle element. And if the middle element value is greater than the search value, the algorithm then repeats the search but only on the part of the list below the middle element. Essentially, the search process involves dividing the list in half after each search attempt until the desired value is found (Bee, 2020).
 
 **Example:** using the binary ssearch algorithm to find the index for the value 10 in the following list ```python my_list = [1,3,5,7,10,15]```
 
@@ -212,7 +213,7 @@ def find_index(elements, value):
 
 #### Algorithm description   
 
-The linear search algorithm works by looping over a list of elements, starting with the first element and working through each element until the value is found or the end of the list. Essentially, the function above loops over elements in a list in a consistent order and only checks each element once until the value is found (Real Python, 2020a).  
+The linear search algorithm works by looping over a list of elements, starting with the first element and working through each element until the value is found or the end of the list is reached. Essentially, the function above loops over elements in a list in a consistent order and only checks each element once until the value is found (Real Python, 2020a).  
 
 **Example:** using the linear search algorithm to find the index for the value 10 in the following list ```python my_list = [1,3,5,7,10,15]```
 
@@ -222,16 +223,16 @@ The linear search algorithm works by looping over a list of elements, starting w
 4. The second iteration of the loop performs a check against the second element and the search value. *The value 3 does not equal 10, so the loop begin the third iteration* 
 5. The third iteration of the loop performs a check against the third element and the search value. *The value 5 does not equal 10, so the loop begin the fourth iteration* 
 6. The fourth iteration of the loop performs a check against the fourth element and the search value. *The value 7 does not equal 10, so the loop begin the fifth iteration* 
-7. The fifth iteration of the loop performs a check against the fifth element and the search value. *The value 10 equals 10, so the loop stops, the function returns the index value 4 and ends.*
-Assuming the element being searched for is at the very end of the list,
-The linear search algorithm includes a single loop structure. Big(O) notation has been used below to analyse the algorithm complexity (number of steps) for worst case scenario.
+7. The fifth iteration of the loop performs a check against the fifth element and the search value. *The value 10 equals 10, so the loop stops, the function returns the index value 4 and ends.*  
+
+The linear search algorithm includes a single loop structure. Big(O) notation has been used below to analyse the algorithm complexity (number of steps) for worst case scenario (that is, the search element is at the very end of the list).
 
 Where n is the size of the list to be searched: 
 - The number of steps required to complete the search using the linear search algorithm is directly proportional to the size of the list or n. As n increases in size, the number of iterations increase by n or linearly. The linear search therefore has a Big(O) notation of O(n).
 
 ### Performance comparison between Binary Search and Linear Search  
 
-Based on the Big(O) complexity discussed above, the binary search algorithm is a more efficient searching algorithm, especially as the size of the list gets larger. The binary search algorithm result, O(log n) indicates there are fewer steps required to search for a value in a list compared with the linear search algorithm O(n). This is particularly true as the size of the list increases. 
+Based on the Big(O) complexity discussed above, the binary search algorithm is a more efficient searching algorithm, especially as the size of the list gets larger. The binary search algorithm result, O(log n) indicates there are fewer steps required to search for a value in a list compared with the linear search algorithm O(n). This is particularly true as the size of the list increases. However, it's important to note that the binary search algorithm requires the list to be sorted before the search begins.
 
 <hr>  
 
