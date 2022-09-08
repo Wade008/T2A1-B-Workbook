@@ -120,6 +120,8 @@ The linear search algorithm works by looping over a list of elements, starting w
 6. The fourth iteration of the loop performs a check against the fourth element and the search value. *The value 7 does not equal 10, so the loop begin the fifth iteration* 
 7. The fifth iteration of the loop performs a check against the fifth element and the search value. *The value 10 equals 10, so the loop stops, the function returns the index value 4 and ends.*  
 
+#### Algorithm performance  
+
 The linear search algorithm includes a single loop structure. Big(O) notation has been used below to analyse the algorithm complexity (number of steps) for worst case scenario (that is, the search element is at the very end of the list).
 
 Where n is the size of the list to be searched: 
