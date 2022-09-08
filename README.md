@@ -10,30 +10,6 @@
 
 ### The Bubble Sort algorithm  
 
-The following python code is an implementation of the bubble sort algorithm:
-
-```python
-def bubble_sort(array):
-    n = len(array)
-
-    for i in range(n):
-
-        already_sorted = True
-
-        for j in range(n - i - 1):
-            if array[j] > array[j + 1]:
-               
-                array[j], array[j + 1] = array[j + 1], array[j]
-
-                already_sorted = False
-
-        if already_sorted:
-            break
-
-    return array
-```
-(Real Python, 2020b)
-
 #### Algorithm description
 
 Essentially, the bubble sort algorithm uses an iterative approach by looping through the elements in a list multiple times and comparing the value of each element with the value of the adjacent element. If the adjacent element's value is less than the current element's value, the elements' positions are swapped. This continues until all the elements have been sorted in ascending order. This process involves using nested loops, with the inner loop working to push the higher valued elements to the right after each iteration. The larger elements are bubbled up with each iteration (Real Python, 2020b). The algorithm is explained in more detail below with an example.    
@@ -65,54 +41,6 @@ Where n is the size of the list to be sorted:
 (Real Python 2020b; Hijazi 2021)
 
 ### The Merge Sort algorithm  
-
-The following python code is an implementation of the merge sort algorithm:
-
-```python
-def merge(left, right):
-
-    if len(left) == 0:
-        return right
-
-    if len(right) == 0:
-        return left
-
-    result = []
-    index_left = index_right = 0
-
-    while len(result) < len(left) + len(right):
-       
-        if left[index_left] <= right[index_right]:
-            result.append(left[index_left])
-            index_left += 1
-        else:
-            result.append(right[index_right])
-            index_right += 1
-
-        if index_right == len(right):
-            result += left[index_left:]
-            break
-
-        if index_left == len(left):
-            result += right[index_right:]
-            break
-
-    return result
-
-
-def merge_sort(array):
-    
-    if len(array) < 2:
-        return array
-
-    midpoint = len(array) // 2
-
-    return merge(
-        left=merge_sort(array[:midpoint]),
-        right=merge_sort(array[midpoint:]))
-
-```
-(Real Python, 2020b)
 
 #### Algorithm description  
 
@@ -153,28 +81,6 @@ Based on the Big(O) complexity discussed above, The merge sort algorithm has O(n
 
 ### The Binary Search algorithm  
 
-The following python code is an implementation of the binary search algorithm:
-
-```python 
-
-def find_index(elements, value):
-    left, right = 0, len(elements) - 1
-
-    while left <= right:
-        middle = (left + right) // 2
-
-        if elements[middle] == value:
-            return middle
-
-        if elements[middle] < value:
-            left = middle + 1
-        elif elements[middle] > value:
-            right = middle - 1
-
-    return "No match found"
-```
-(Real Python, 2020a)
-
 #### Algorithm description   
 
 Similar to the merge sort algorithm above, the binary search algorithm uses an iterative or recursive, divide-and-conquer approach to searching for a particular value in a list of values; however, for the algorithm to work, the list must first be sorted from smallest to largest value. Also, if there are duplicate values in the list, the algorithm will only return the position of the first instance. Once the array is sorted, the algorithm determines the location of the middle element in the array and checks if the middle element's value equals that of the search value. If the middle element is equal to the value, the algorithm returns the location of the value and stops. If the middle element value is lower than the search value, the algorithm then repeats the search but only on the part of the list above the middle element. And if the middle element value is greater than the search value, the algorithm then repeats the search but only on the part of the list below the middle element. Essentially, the search process involves dividing the list in half after each search attempt until the desired value is found (Bee, 2020).
@@ -199,17 +105,6 @@ Where n is the size of the list to be searched:
 - Since the number of elements being searched is effectively halved after each iteration of the loop structure, the number of steps required to find a given element can be explained as a = n/2<sup>a</sup>, where 'a' is the number steps and 'n' is the number of elements in the list to be searched. Therefore, on the first iteration, the list is divided in half, on the second iteration it is divided into quarters and so on. The number of steps required can be expressed as log<sub>2</sub>n and has a Big O value of O(log n). As the value of n increases the number of steps increases, but at a decreasing rate, making the binary search algorithm an efficient search algorithm for large lists.     
 
 ### The Linear Search algorithm  
-
-The following python code is an implementation of the linear search algorithm:
-
-```python
-
-def find_index(elements, value):
-    for index, element in enumerate(elements):
-        if element == value:
-            return index
-```
-(Real Python, 2020a)
 
 #### Algorithm description   
 
